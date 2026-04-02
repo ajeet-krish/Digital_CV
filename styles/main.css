@@ -1,0 +1,96 @@
+/* Import a clean monospaced font as a fallback for Meslo */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=JetBrains+Mono:wght@300;400;700&display=swap');
+
+/* Dracula Color Palette Variables */
+:root {
+    --background: #282a36;
+    --current_line: #44475a;
+    --foreground: #f8f8f2;
+    --comment: #6272a4;
+    --cyan: #8be9fd;
+    --green: #50fa7b;
+    --orange: #ffb86c;
+    --pink: #ff79c6;
+    --purple: #bd93f9;
+    --red: #ff5544;
+    --yellow: #f1fa8c;
+}
+
+/* Global Font Settings - Prioritize Meslo LG L if installed locally */
+html, body, [class*="css"] {
+    font-family: 'Meslo LG L', 'JetBrains Mono', 'Fira Code', monospace;
+    color: var(--foreground);
+    background-color: var(--background);
+}
+
+/* Links and Interactivity */
+a {
+    text-decoration: none;
+    color: var(--cyan) !important;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+a:hover {
+    color: var(--pink) !important;
+    text-decoration: underline;
+}
+
+/* Streamlit Container Adjustments */
+.stApp {
+    background-color: var(--background);
+}
+
+/* Headers */
+h1, h2, h3 {
+    color: var(--purple) !important;
+    font-weight: 700 !important;
+}
+
+/* Customizing Streamlit Buttons to match the theme */
+.stButton>button {
+    background-color: var(--current-line);
+    color: var(--foreground);
+    border: 1px solid var(--purple);
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
+}
+
+.stButton>button:hover {
+    border-color: var(--pink);
+    color: var(--pink);
+    background-color: var(--background);
+    box-shadow: 0 0 10px var(--pink);
+}
+
+/* Sidebar Styling */
+[data-testid="stSidebar"] {
+    background-color: #21222c; /* Slightly darker than main bg */
+    border-right: 1px solid var(--current-line);
+}
+
+/* Metrics and DataFrames */
+[data-testid="stMetricValue"] {
+    color: var(--green) !important;
+}
+
+/* Code Blocks */
+code {
+    color: var(--orange);
+    background-color: var(--current-line);
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+
+/* Hide Streamlit Branding */
+#MainMenu {visibility: visible;}
+footer {visibility: visible;}
+header {visibility: visible;}
+
+/* Horizontal Rule */
+hr {
+    border: 0;
+    height: 1px;
+    background: var(--current-line);
+    margin: 2rem 0;
+}
