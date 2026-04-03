@@ -132,8 +132,8 @@ with col2:
 st.divider()
 
 # --- WORK HISTORY ---
-st.subheader("Work History")
 st.write("\n")
+st.markdown(f"### <span style='color: {PURPLE};'># Experience</span>", unsafe_allow_html=True)
 
 def work_block(title, date, location, details):
     st.markdown(f"""
@@ -155,65 +155,33 @@ def work_block(title, date, location, details):
 
 # Job 1
 work_block(
-    "Systems Engineer, Medical Equipment (Intern) | CenTrak",
+    "Systems Engineer (Intern) | CenTrak",
     "10/2020 - 09/2021",
     "Newtown, PA, United States",
-    "• Improved device reliability assessments by developing custom statistical models in Excel and R to analyze real-time performance data, ensuring higher precision in medical monitoring systems.<br>"
-    "• Increased maintenance planning efficiency by developing automated technical performance reports for Connect Pulse™, providing engineering and operations teams with the insights needed to reduce system downtime.<br>"
-    "• Optimized hardware lifecycle management by interpreting battery discharge and device datasets to identify failure trends, enabling data-driven decisions that prevented unexpected equipment outages.<br>"
-    "• Streamlined troubleshooting workflows by structuring large-scale RTLS datasets and applying data-cleaning techniques to generate actionable findings that accelerated technical support resolutions."
+    "• Developed statistical models (R, Excel) to assess medical device reliability.<br>"
+    ". Automated performance reporting for Connect Pulse™ to minimize system downtime.<br>"
+    "• Analyzed battery and device datasets to predict and prevent hardware failures.<br>"
+    "• Structured and cleaned large-scale RTLS data to accelerate troubleshooting."
 )
 
 # Job 2
 work_block(
-    "Systems Engineer, Medical Equipment (Intern) | CenTrak",
+    "Systems Engineer (Intern) | CenTrak",
     "05/2019 - 09/2019",
     "Newtown, PA, United States",
-    "• Enhanced Real-Time Location Services (RTLS) functionality by applying regression and classification techniques to performance data, identifying system bottlenecks and refining location accuracy.<br>"
-    "• Increased system validation accuracy by executing rigorous on-site testing protocols and coordinating cross-functional feedback loops with engineering teams to bridge the gap between lab results and field performance.<br>"
-    "• Streamlined stakeholder decision-making processes by synthesizing complex technical datasets into actionable findings and formal recommendations, ensuring data-driven alignment on system upgrades and feature rollouts."
+    "• Applied regression and classification models to optimize RTLS location accuracy.<br>"
+    "• Executed on-site testing protocols to validate hardware field performance.<br>"
+    "• Synthesized technical data into actionable recommendations for system upgrades."
 )
-
-# --- WORK HISTORY old ---
-st.subheader("Work History")
-
-st.write("**Systems Engineer, Medical Equipment (Intern) | CenTrak | Newtown, PA, United States**")
-st.write("10/2020 - 09/2021")
-st.write(
-    """
-- ► Improved device reliability assessments by developing custom statistical models in Excel and R to analyze real-time
-performance data, ensuring higher precision in medical monitoring systems.
-- ► Increased maintenance planning efficiency by developing automated technical performance reports for Connect Pulse™, providing engineering and operations teams with the insights needed to reduce system downtime.
-- ► Optimized hardware lifecycle management by interpreting battery discharge and device datasets to identify failure
-trends, enabling data-driven decisions that prevented unexpected equipment outages.
-- ► Streamlined troubleshooting work>lows by structuring large-scale RTLS datasets and applying data-cleaning techniques
-to generate actionable Findings that accelerated technical support resolutions.
-"""
-)
-
-st.write('\n')
-st.write("05/2019 - 09/2019")
-st.write(
-    """
-- ► Enhanced Real-Time Location Services (RTLS) functionality by applying regression and classification techniques to
-performance data, identifying system bottlenecks and refining location accuracy.
-- ► Increased system validation accuracy by executing rigorous on-site testing protocols and coordinating cross-functional
-feedback loops with engineering teams to bridge the gap between lab results and field performance.
-- ► Streamlined stakeholder decision-making processes by synthesizing complex technical datasets into actionable findings
-and formal recommendations, ensuring data-driven alignment on system upgrades and feature rollouts.
-"""
-)
-
-st.divider()
 
 # --- SKILLS SECTION ---
 st.write("\n")
-st.markdown(f"### <span style='color: {YELLOW};'>Skills</span>", unsafe_allow_html=True)
+st.markdown(f"### <span style='color: {ORANGE};'># Skills</span>", unsafe_allow_html=True)
 
 skill_categories = {
     "CAD": {"items": ["SolidWorks", "FreeCAD", "Fusion 360"], "color": CYAN},
     "CFD": {"items": ["Ansys CFX", "OpenFOAM"], "color": GREEN},
-    "Programming": {"items": ["Python", "MATLAB"], "color": ORANGE},
+    "Data Analysis": {"items": ["Python", "MATLAB"], "color": ORANGE},
     "Manufacturing": {"items": ["CNC Machining", "3D Printing", "Lathe & Mill", "MIG Welding"], "color": PINK}
 }
 
@@ -224,7 +192,7 @@ for category, data in skill_categories.items():
     items = data["items"]
 
     # Category Key in its specific color
-    skills_inner_html += f'&nbsp;&nbsp;&nbsp;&nbsp;"<span style="color: {cat_color};">{category}</span>": ['
+    skills_inner_html += f'&nbsp;&nbsp;&nbsp;&nbsp;"<span>{category}</span>": ['
 
     # Tags using the category-specific color for the border and text
     tags = "".join([
@@ -238,14 +206,13 @@ for category, data in skill_categories.items():
 st.markdown(f"""
     <div style="
         background-color: #21222c; 
-        border-left: 4px solid {YELLOW}; 
+        border-left: 4px solid {ORANGE}; 
         padding: 20px; 
         margin-bottom: 25px; 
         font-family: 'Meslo LG L', monospace;
         border-radius: 0 8px 8px 0;
     ">
-        <div style="color: {CYAN}; font-weight: bold; font-size: 16px;">Technical Stack</div>
-        <div style="color: {COMMENT}; font-size: 12px; margin-bottom: 10px;">Hardware & Software Proficiencies</div>
+        <div style="color: {CYAN}; font-weight: bold; font-size: 16px; margin-bottom: 10px; ">Hardware & Software Proficiencies</div>
         <div style="color: {FOREGROUND}; font-size: 14px; line-height: 1.6;">
             <span style="color: {PURPLE};">return</span> {{<br>
             {skills_inner_html}
@@ -256,20 +223,20 @@ st.markdown(f"""
 
 # --- EDUCATION SECTION ---
 st.write("\n")
-st.markdown(f"### <span style='color: {ORANGE};'>Education</span>", unsafe_allow_html=True)
+st.markdown(f"### <span style='color: {PINK};'># Education</span>", unsafe_allow_html=True)
 
 # Block Style
 st.markdown(f"""
     <div style="
         background-color: #21222c; 
-        border-left: 4px solid {ORANGE}; 
+        border-left: 4px solid {PINK}; 
         padding: 20px; 
         margin-bottom: 25px; 
         font-family: 'Meslo LG L', monospace;
         border-radius: 0 8px 8px 0;
     ">
         <div style="color: {CYAN}; font-weight: bold; font-size: 16px;">University of Ottawa</div>
-        <div style="color: {COMMENT}; font-size: 12px; margin-bottom: 10px;">Ottawa, ON, Canada | Expected May 2026</div>
+        <div style="color: {COMMENT}; font-size: 12px; margin-bottom: 10px;">Ottawa, ON, Canada | May 2026</div>
         <div style="color: {FOREGROUND}; font-size: 14px; line-height: 1.6;">
             <span style="color: {PURPLE};">return</span> {{<br>
             &nbsp;&nbsp;&nbsp;&nbsp;"degree": "Bachelor of Applied Science (BASc)",<br>
