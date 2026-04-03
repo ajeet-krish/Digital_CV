@@ -1,10 +1,7 @@
-/* Import a clean monospaced font as a fallback for Meslo */
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=JetBrains+Mono:wght@300;400;700&display=swap');
-
-/* Dracula Color Palette Variables */
+/* --- 1. DRACULA VARIABLES --- */
 :root {
     --background: #282a36;
-    --current_line: #44475a;
+    --current-line: #44475a;
     --foreground: #f8f8f2;
     --comment: #6272a4;
     --cyan: #8be9fd;
@@ -14,46 +11,46 @@
     --purple: #bd93f9;
     --red: #ff5544;
     --yellow: #f1fa8c;
+    --sidebar-bg: #21222c;
 }
 
-/* Global Font Settings - Prioritize Meslo LG L if installed locally */
-html, body, [class*="css"] {
-    font-family: 'Meslo LG L', 'JetBrains Mono', 'Fira Code', monospace;
-    color: var(--foreground);
-    background-color: var(--background);
+/* --- 2. FONTS & GLOBAL RESET --- */
+@import url('https://cdn.jsdelivr.net/npm/@xz/fonts@1/serve/meslo-lg.min.css');
+
+html, body, [data-testid="stAppViewContainer"], [data-testid="stHeader"], .stMarkdown, p, span, div, h1, h2, h3 {
+    font-family: 'Meslo LG L', 'JetBrains Mono', monospace !important;
 }
 
-/* Links and Interactivity */
-a {
-    text-decoration: none;
-    color: var(--cyan) !important;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-a:hover {
-    color: var(--pink) !important;
-    text-decoration: underline;
-}
-
-/* Streamlit Container Adjustments */
 .stApp {
     background-color: var(--background);
 }
 
-/* Headers */
-h1, h2, h3 {
-    color: var(--purple) !important;
-    font-weight: 700 !important;
+/* --- 3. LINKS --- */
+a {
+    color: var(--cyan) !important;
+    text-decoration: none !important;
+    transition: 0.3s ease;
 }
 
-/* Customizing Streamlit Buttons to match the theme */
+a:hover {
+    color: var(--pink) !important;
+    text-decoration: none !important;
+}
+
+/* --- 4. SIDEBAR --- */
+[data-testid="stSidebar"] {
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--current-line);
+}
+
+/* --- 5. NATIVE STREAMLIT BUTTONS --- */
 .stButton>button {
-    background-color: var(--current-line);
+    background-color: var(--sidebar-bg) !important;
     color: var(--foreground);
     border: 1px solid var(--purple);
     border-radius: 5px;
     transition: all 0.2s ease-in-out;
+    font-family: 'Meslo LG L', monospace;
 }
 
 .stButton>button:hover {
@@ -63,18 +60,29 @@ h1, h2, h3 {
     box-shadow: 0 0 10px var(--pink);
 }
 
-/* Sidebar Styling */
-[data-testid="stSidebar"] {
-    background-color: #21222c; /* Slightly darker than main bg */
-    border-right: 1px solid var(--current-line);
+/* --- 6. CUSTOM DOWNLOAD BUTTON --- */
+.download-btn {
+    background-color: var(--sidebar-bg) !important;
+    color: var(--purple) !important;
+    padding: 8px 15px;
+    text-decoration: none !important;
+    border-radius: 5px;
+    border: 1px solid var(--purple);
+    display: inline-block;
+    font-family: 'Meslo LG L', monospace;
+    font-size: 15px;
+    font-weight: bold;
+    transition: all 0.3s ease;
 }
 
-/* Metrics and DataFrames */
-[data-testid="stMetricValue"] {
-    color: var(--green) !important;
+.download-btn:hover {
+    background-color: var(--current-line) !important;
+    color: var(--pink) !important;
+    border-color: var(--pink) !important;
+    box-shadow: 0 0 10px var(--pink);
 }
 
-/* Code Blocks */
+/* --- 7. CODE & METRICS --- */
 code {
     color: var(--orange);
     background-color: var(--current-line);
@@ -82,15 +90,11 @@ code {
     border-radius: 3px;
 }
 
-/* Hide Streamlit Branding */
-#MainMenu {visibility: visible;}
-footer {visibility: visible;}
-header {visibility: visible;}
+[data-testid="stMetricValue"] {
+    color: var(--green) !important;
+}
 
-/* Horizontal Rule */
-hr {
-    border: 0;
-    height: 1px;
-    background: var(--current-line);
-    margin: 2rem 0;
+/* --- 8. UI CLEANUP --- */
+#MainMenu, footer, header {
+    visibility: hidden;
 }
