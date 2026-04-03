@@ -96,5 +96,5 @@ code {
 
 /* --- 8. UI CLEANUP --- */
 #MainMenu, footer, header {
-    visibility: hidden;
+    visibility: visible;
 }

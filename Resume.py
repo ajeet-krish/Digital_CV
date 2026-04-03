@@ -4,7 +4,7 @@ from PIL import Image
 import base64
 
 # --- PAGE CONFIG ---
-st.set_page_config(page_title="Digital CV | Ajeet Krishnasamy", page_icon=":wave:", layout="centered")
+st.set_page_config(page_title="Digital CV | Ajeet Krishnasamy", page_icon=":wave:", layout="wide")
 
 # --- PATH SETTINGS ---
 current_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
@@ -60,15 +60,15 @@ SOCIAL_MEDIA = {
 # --- TOP NAVIGATION BREADCRUMB ---
 st.markdown(f"""
     <div style="font-family: 'Meslo LG L', monospace; font-size: 12px; color: {COMMENT}; margin-bottom: 20px;">
-        ~ / portfolio / <span style="color: {PURPLE};">ajeet_krishnasamy.py</span>
+        ~ / portfolio / <span style="color: {PINK};">ajeet_krishnasamy.py</span>
     </div>
 """, unsafe_allow_html=True)
 
 # --- HERO SECTION ---
-col1, col2 = st.columns([1, 2], gap="medium")
+col1, col2 = st.columns([1, 2], gap="large")
 with col1:
     if profile_pic:
-        st.image(profile_pic, width=230)
+        st.image(profile_pic, width=400)
 
 with col2:
     # --- NAME & INTRO ---
@@ -98,7 +98,7 @@ with col2:
             align-items: center;
             gap: 15px;
             font-family: 'Meslo LG L', monospace; 
-            font-size: 14px;
+            font-size: 16px;
             margin-top: 10px;
         ">
             <div>
@@ -123,8 +123,8 @@ st.markdown(f"""
         align-items: center;
         gap: 15px;
         font-family: 'Meslo LG L', monospace; 
-        font-size: 14px;
-        margin-top: 20px;
+        font-size: 16px;
+        margin-top: 10px;
     ">
         {resume_button_html}
         <span style="color: {COMMENT};">|</span>
@@ -152,8 +152,8 @@ def work_block(title, date, location, details):
             border-radius: 0 8px 8px 0;
         ">
             <div style="color: {CYAN}; font-weight: bold; font-size: 16px;">{title}</div>
-            <div style="color: {COMMENT}; font-size: 12px; margin-bottom: 10px;"> {date} | {location}</div>
-            <div style="color: {FOREGROUND}; font-size: 13px; line-height: 1.6;">
+            <div style="color: {COMMENT}; font-size: 13px; margin-bottom: 10px;"> {date} | {location}</div>
+            <div style="color: {FOREGROUND}; font-size: 14px; line-height: 1.6;">
                 {details}
             </div>
         </div>
