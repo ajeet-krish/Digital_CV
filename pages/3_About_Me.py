@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.set_page_config(page_title="About Me | Ajeet", page_icon="🏃")
+st.set_page_config(page_title="About Me | Ajeet Krishnasamy", page_icon="🏃")
 st.title("Beyond Engineering")
 
 st.write(

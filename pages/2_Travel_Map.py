@@ -2,7 +2,7 @@ import streamlit as st
 import folium
 from streamlit_folium import st_folium
 
-st.set_page_config(page_title="Travel Map | Ajeet", page_icon="🌍")
+st.set_page_config(page_title="Travel Map | Ajeet Krishnasamy", page_icon="🌍")
 st.title("Travel Map")
 st.write("An interactive map of places I've visited.")
 
