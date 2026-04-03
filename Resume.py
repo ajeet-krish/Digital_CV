@@ -76,7 +76,7 @@ with col2:
         <h1 style="color: {PURPLE}; font-size: 36px; text-align: center; margin-top: 0; margin-bottom: 0px;">
             {NAME}
         </h1>
-        <div style="line-height: 1.6; font-size: 16px; margin-bottom: 10px;">
+        <div style="color: {FOREGROUND}; line-height: 1.6; font-size: 16px; margin-bottom: 10px;">
             I am a <span style="color: {ORANGE};">Biomedical Mechanical Engineering</span> graduate 
             specializing in <span style="color: {CYAN};">aerodynamics</span> and 
             <span style="color: {CYAN};">CFD</span> for the aerospace and automotive sectors. 
