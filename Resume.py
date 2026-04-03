@@ -4,7 +4,7 @@ from PIL import Image
 import base64
 
 # --- PAGE CONFIG ---
-st.set_page_config(page_title="Digital CV | Ajeet Krishnasamy", page_icon=":wave:", layout="wide")
+st.set_page_config(page_title="Digital CV | Ajeet Krishnasamy", page_icon=":tada:", layout="wide")
 
 # --- PATH SETTINGS ---
 current_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
