@@ -3,8 +3,18 @@ import streamlit as st
 from PIL import Image
 import base64
 
-# --- DRACULA THEME COLORS ---
-BG_COLOR = "#282a36"
+# --- PAGE CONFIG ---
+st.set_page_config(page_title="Digital CV | Ajeet Krishnasamy", page_icon=":wave:", layout="centered")
+
+# --- PATH SETTINGS ---
+current_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
+css_file = current_dir / "styles" / "main.css"
+resume_file = current_dir / "assets" / "AjeetKrishnasamyResumeEng.pdf"
+profile_pic = current_dir / "assets" / "profile_pic.png"
+
+# --- VISUAL SETUP ---
+# Dracula Theme Colours
+BACKGROUND = "#282a36"
 CURRENT_LINE = "#44475a"
 SELECTION = "#44475a"
 FOREGROUND = "#f8f8f2"
@@ -17,66 +27,35 @@ PURPLE = "#bd93f9"
 RED = "#ff5544"
 YELLOW = "#f1fa8c"
 
-def get_binary_file_downloader_html(bin_file, file_label='File'):
+# Load external css file
+def local_css(file_path):
+    if file_path.exists():
+        with open(file_path) as f:
+            st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+
+local_css(css_file)
+
+# Resume Download Button Function
+def get_file_downloader_html(bin_file, file_label='File'):
     with open(bin_file, 'rb') as f:
         data = f.read()
     bin_str = base64.b64encode(data).decode()
     href = f'data:application/octet-stream;base64,{bin_str}'
+    return f'<a href="{href}" download="{Path(bin_file).name}" class="download-btn">{file_label}</a>'
 
-    # This is the HTML that mimics your skill tag style
-    custom_css = f"""
-        <a href="{href}" download="{Path(bin_file).name}" style="
-            background-color: {CURRENT_LINE}; 
-            color: {PURPLE}; 
-            padding: 8px 15px; 
-            text-decoration: none;
-            border-radius: 5px; 
-            border: 1px solid {PURPLE};
-            display: inline-block;
-            font-family: 'Meslo LG L', monospace;
-            font-size: 14px;
-            font-weight: bold;
-            transition: 0.3s;
-        " onmouseover="this.style.backgroundColor='#6272a4'; this.style.color='#ff79c6';" 
-           onmouseout="this.style.backgroundColor='{CURRENT_LINE}'; this.style.color='{PURPLE}';">
-            📄 Download Resume (PDF)
-        </a>
-    """
-    return custom_css
-
-# --- PATH SETTINGS ---
-current_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
-css_file = current_dir / "styles" / "main.css"
-resume_file = current_dir / "assets" / "AjeetKrishnasamyResumeEng.pdf"
-profile_pic = current_dir / "assets" / "profile_pic.png"
+# Use a placeholder if image is missing to prevent crash during development
+try:
+    profile_pic = Image.open(profile_pic)
+except Exception:
+    profile_pic = None
 
 # --- GENERAL SETTINGS ---
-
-PAGE_TITLE = "Digital CV | Ajeet Krishnasamy"
-PAGE_ICON = ":wave:"
 NAME = "Ajeet Krishnasamy"
-DESCRIPTION = """
-Biomedical Mechanical Engineering Graduate
-"""
 EMAIL = "ajeetkrish@icloud.com"
 SOCIAL_MEDIA = {
     "LinkedIn": "https://www.linkedin.com/in/ajeetkrishnasamy/",
     "GitHub": "https://github.com/ajeet-krish",
 }
-st.set_page_config(page_title=PAGE_TITLE, page_icon=PAGE_ICON, layout="centered")
-# --- LOAD CSS, PDF & PROFILE PIC ---
-if css_file.exists():
-    with open(css_file) as f:
-        st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
-with open(resume_file, "rb") as pdf_file:
-    PDFbyte = pdf_file.read()
-
-# Use a placeholder if image is missing to prevent crash during development
-try:
-    profile_pic = Image.open(profile_pic)
-except FileNotFoundError:
-    profile_pic = None
 
 # --- TOP NAVIGATION BREADCRUMB ---
 st.markdown(f"""
@@ -92,47 +71,74 @@ with col1:
         st.image(profile_pic, width=230)
 
 with col2:
-    # 1. Name and Title Section
+    # --- NAME & INTRO ---
     st.markdown(f"""
-        <div style="font-family: 'Meslo LG L', 'JetBrains Mono', monospace;">
-            <h1 style="color: {PURPLE}; margin-bottom: 0px; font-size: 32px;">{NAME}</h1>
-            <p style="color: {FOREGROUND}; margin-top: 5px; font-size: 16px">
-                Biomedical Mechanical Engineering Graduate
-            </p>
-            <p style="color: {FOREGROUND}; margin-top: 5px; font-size: 16px">
-               Aerodynamics & CFD | Python
-            </p>
+        <h1 style="color: {PURPLE}; font-size: 36px; text-align: center; margin-top: 0; margin-bottom: 0px;">
+            {NAME}
+        </h1>
+        <div style="line-height: 1.6; font-size: 16px; margin-bottom: 10px;">
+            I am a <span style="color: {ORANGE};">Biomedical Mechanical Engineering</span> graduate 
+            specializing in <span style="color: {CYAN};">aerodynamics</span> and 
+            <span style="color: {CYAN};">CFD</span> for the aerospace and automotive sectors. 
+            I leverage <span style="color: {CYAN};">Python</span> and 
+            <span style="color: {CYAN};">MATLAB</span> to automate high-fidelity simulations in 
+            <span style="color: {CYAN};">OpenFOAM</span>, bridging the gap between conceptual 
+            <span style="color: {ORANGE};">CAD</span> design and physical validation. 
+            This portfolio showcases my work in fluid dynamics, structural modeling, 
+            and data analysis.
         </div>
     """, unsafe_allow_html=True)
 
-    # 2. Metadata (Comment Style)
+    # Metadata
     st.markdown(f"""
-        <div style="margin-top: 10px; margin-bottom: 20px; font-family: 'Meslo LG L', monospace; font-size: 13px; color: {COMMENT};">
-            📍 Toronto, ON | 🌎 CAN & US Citizen | ✈️ Open to Relocation
+        <div style="
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            font-family: 'Meslo LG L', monospace; 
+            font-size: 14px;
+            margin-top: 10px;
+        ">
+            <div>
+                <span style="color: {ORANGE};">Toronto, ON</span>
+                <span style="color: {COMMENT};">|</span>
+                <span style="color: {ORANGE};">CAN & US Citizen</span>
+                <span style="color: {COMMENT};">|</span>
+                <span style="color: {ORANGE};">Open to Relocation</span> 
+            </div>
         </div>
     """, unsafe_allow_html=True)
 
-    # 3. Download Button
-    # Assuming get_binary_file_downloader_html is defined in your script
-    resume_button_html = get_binary_file_downloader_html(resume_file, 'Resume')
-    st.markdown(resume_button_html, unsafe_allow_html=True)
 
-    # 4. Standardized Social Links (CLI Style)
-    # We style these like tags/arguments to match your skills section
-    st.markdown(f"""
-        <div style="margin-top: 20px; font-family: 'Meslo LG L', monospace; font-size: 14px;">
-            <a href="mailto:{EMAIL}" style="color: {CYAN}; text-decoration: none;">{EMAIL}</a>
-            <span style="color: {COMMENT};"> | </span>
-            <a href="{SOCIAL_MEDIA['LinkedIn']}" style="color: {CYAN}; text-decoration: none;">LinkedIn</a>
-            <span style="color: {COMMENT};"> | </span>
-            <a href="{SOCIAL_MEDIA['GitHub']}" style="color: {CYAN}; text-decoration: none;">GitHub</a>
-        </div>
-    """, unsafe_allow_html=True)
+resume_button_html = get_file_downloader_html(resume_file, 'Resume.pdf')
+
+# Flex Row
+st.markdown(f"""
+    <div style="
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        gap: 15px;
+        font-family: 'Meslo LG L', monospace; 
+        font-size: 14px;
+        margin-top: 20px;
+    ">
+        {resume_button_html}
+        <span style="color: {COMMENT};">|</span>
+        <a href="mailto:{EMAIL}">{EMAIL}</a>
+        <span style="color: {COMMENT};">|</span>
+        <a href="{SOCIAL_MEDIA['LinkedIn']}">LinkedIn</a>
+        <span style="color: {COMMENT};">|</span>
+        <a href="{SOCIAL_MEDIA['GitHub']}">GitHub</a>
+    </div>
+""", unsafe_allow_html=True)
 
 st.divider()
 
 # --- WORK HISTORY ---
-st.write("\n")
 st.markdown(f"### <span style='color: {PURPLE};'># Experience</span>", unsafe_allow_html=True)
 
 def work_block(title, date, location, details):
@@ -141,7 +147,7 @@ def work_block(title, date, location, details):
             background-color: #21222c; 
             border-left: 4px solid {PURPLE}; 
             padding: 20px; 
-            margin-bottom: 25px; 
+            margin-bottom: 15px; 
             font-family: 'Meslo LG L', monospace;
             border-radius: 0 8px 8px 0;
         ">
@@ -196,7 +202,7 @@ for category, data in skill_categories.items():
 
     # Tags using the category-specific color for the border and text
     tags = "".join([
-        f'<span style="background-color: {CURRENT_LINE}; color: {cat_color}; padding: 2px 8px; margin: 2px; border-radius: 4px; border: 1px solid {cat_color}; font-size: 11px; white-space: nowrap;">{item}</span>'
+        f'<span style="background-color: {CURRENT_LINE}; color: {cat_color}; padding: 2px 8px; margin: 2px; border-radius: 4px; border: 1px solid {cat_color}; font-size: 13px; white-space: nowrap;">{item}</span>'
         for item in items
     ])
 
